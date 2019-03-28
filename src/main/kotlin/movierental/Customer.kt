@@ -15,7 +15,6 @@ class Customer(val name: String) {
         var result = "Rental Record for $name\n"
 
         for (each in _rentals) {
-            var thisAmount = each.getCharge()
 
             // add frequent renter points
             frequentRenterPoints++
@@ -24,8 +23,8 @@ class Customer(val name: String) {
                 frequentRenterPoints++
 
             // show figures for this rental
-            result += "\t" + each.movie.title + "\t" + thisAmount.toString() + "\n"
-            totalAmount += thisAmount
+            result += "\t" + each.movie.title + "\t" + each.getCharge().toString() + "\n"
+            totalAmount += each.getCharge()
         }
 
         // add footer lines
