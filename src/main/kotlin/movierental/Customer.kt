@@ -16,11 +16,7 @@ class Customer(val name: String) {
 
         for (each in _rentals) {
 
-            // add frequent renter points
-            frequentRenterPoints++
-            // add bonus for a two day new release rental
-            if (each.movie.priceCode == Movie.NEW_RELEASE && each.daysRented > 1)
-                frequentRenterPoints++
+            frequentRenterPoints += each.getFrequentRenterPoints()
 
             // show figures for this rental
             result += "\t" + each.movie.title + "\t" + each.getCharge().toString() + "\n"
