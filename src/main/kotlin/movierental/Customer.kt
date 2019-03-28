@@ -15,7 +15,7 @@ class Customer(val name: String) {
         var result = "Rental Record for $name\n"
 
         for (each in _rentals) {
-            var thisAmount = amountFor(each)
+            var thisAmount = each.getCharge()
 
             // add frequent renter points
             frequentRenterPoints++
@@ -33,25 +33,5 @@ class Customer(val name: String) {
         result += "You earned " + frequentRenterPoints.toString() + " frequent renter points"
 
         return result
-    }
-
-    private fun amountFor(rental: Rental): Double {
-        var thisAmount = 0.0
-
-        //determine amounts for each line
-        when (rental.movie.priceCode) {
-            Movie.REGULAR -> {
-                thisAmount += 2.0
-                if (rental.daysRented > 2)
-                    thisAmount += (rental.daysRented - 2) * 1.5
-            }
-            Movie.NEW_RELEASE -> thisAmount += (rental.daysRented * 3).toDouble()
-            Movie.CHILDRENS -> {
-                thisAmount += 1.5
-                if (rental.daysRented > 3)
-                    thisAmount += (rental.daysRented - 3) * 1.5
-            }
-        }
-        return thisAmount
     }
 }
