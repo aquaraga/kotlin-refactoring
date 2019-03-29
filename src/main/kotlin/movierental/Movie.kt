@@ -1,6 +1,16 @@
 package movierental
 
-class Movie(val title: String, var priceCode: Int) {
+class Movie {
+    var title: String
+        private set
+
+    private var price: Price
+
+    constructor(title: String, priceCode: Int) {
+        this.title = title
+        this.price = Price.fromCode(priceCode)
+    }
+
     companion object {
         val CHILDRENS = 2
         val NEW_RELEASE = 1
@@ -11,7 +21,7 @@ class Movie(val title: String, var priceCode: Int) {
         var amount = 0.0
 
         //determine amounts for each line
-        when (priceCode) {
+        when (price.getPriceCode()) {
             Movie.REGULAR -> {
                 amount += 2.0
                 if (_daysRented > 2)
