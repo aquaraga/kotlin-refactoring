@@ -6,4 +6,24 @@ class Movie(val title: String, var priceCode: Int) {
         val NEW_RELEASE = 1
         val REGULAR = 0
     }
+
+    fun getCharge(_daysRented: Int): Double {
+        var amount = 0.0
+
+        //determine amounts for each line
+        when (priceCode) {
+            Movie.REGULAR -> {
+                amount += 2.0
+                if (_daysRented > 2)
+                    amount += (_daysRented - 2) * 1.5
+            }
+            Movie.NEW_RELEASE -> amount += (_daysRented * 3).toDouble()
+            Movie.CHILDRENS -> {
+                amount += 1.5
+                if (_daysRented > 3)
+                    amount += (_daysRented - 3) * 1.5
+            }
+        }
+        return amount
+    }
 }
