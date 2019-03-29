@@ -1,9 +1,7 @@
 package movierental
 
-import java.util.ArrayList
-
 class Customer(val name: String) {
-    private val _rentals = ArrayList<Rental>()
+    private val _rentals = Rentals()
 
     fun addRental(arg: Rental) {
         _rentals.add(arg)
@@ -16,26 +14,9 @@ class Customer(val name: String) {
             result += "\t" + each.movie.title + "\t" + each.getCharge().toString() + "\n"
         }
         // add footer lines
-        result += "Amount owed is " + totalCharge().toString() + "\n"
-        result += "You earned " + totalFrequentRenterPoints().toString() + " frequent renter points"
+        result += "Amount owed is " + _rentals.totalCharge().toString() + "\n"
+        result += "You earned " + _rentals.totalFrequentRenterPoints().toString() + " frequent renter points"
 
         return result
-    }
-
-    private fun totalCharge(): Double {
-        var totalAmount = 0.0
-        for (each in _rentals) {
-            totalAmount += each.getCharge()
-        }
-        return totalAmount
-    }
-
-    private fun totalFrequentRenterPoints(): Int {
-        var frequentRenterPoints = 0
-        for (each in _rentals) {
-            frequentRenterPoints += each.getFrequentRenterPoints()
-        }
-        return frequentRenterPoints
-
     }
 }
