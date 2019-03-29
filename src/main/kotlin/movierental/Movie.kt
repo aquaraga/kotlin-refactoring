@@ -26,4 +26,14 @@ class Movie(val title: String, var priceCode: Int) {
         }
         return amount
     }
+
+    fun getFrequentRenterPoints(daysRented: Int): Int {
+        var eachRenterPoints = 0
+        // add frequent renter points
+        eachRenterPoints++
+        // add bonus for a two day new release rental
+        if (price.getPriceCode() == Movie.NEW_RELEASE && daysRented > 1)
+            eachRenterPoints++
+        return eachRenterPoints
+    }
 }
